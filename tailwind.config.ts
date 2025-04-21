@@ -19,6 +19,10 @@ export default {
 			}
 		},
 		extend: {
+      fontFamily: {
+        // Add 'poppins' font family as default sans
+        sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -110,3 +114,4 @@ export default {
 	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
