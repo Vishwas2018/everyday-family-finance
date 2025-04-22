@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { 
   mockBills, 
@@ -10,31 +9,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { BellRing, Calendar, Check, Plus, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { BellRing, Calendar, Check, Plus, AlertTriangle, CheckCircle2, Receipt } from "lucide-react";
 import { Bill, ReminderStatus } from "@/types/models";
 
 const Reminders = () => {
   const [bills, setBills] = useState<Bill[]>(mockBills);
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
+  const [isReminderDialogOpen, setIsReminderDialogOpen] = useState(false);
 
   // Group bills by status
   const unpaidBills = bills.filter(bill => bill.status === "unpaid");
@@ -70,57 +56,94 @@ const Reminders = () => {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <h1 className="text-2xl font-bold">Bills & Reminders</h1>
         
-        <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
-          <DialogTrigger asChild>
-            <Button>
-              <Plus className="h-4 w-4 mr-2" />
-              Add Bill
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Add New Bill</DialogTitle>
-              <DialogDescription>
-                Set up a new bill or reminder with due date
-              </DialogDescription>
-            </DialogHeader>
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Input type="text" placeholder="Bill Name" className="col-span-4" />
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="bg-primary hover:bg-primary-dark shadow-lg hover:shadow-xl transition-all duration-200">
+                <Receipt className="h-4 w-4 mr-2" />
+                Add Bill Payment
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md bg-white/95 backdrop-blur-lg shadow-xl border-2 border-primary/20">
+              <DialogHeader>
+                <DialogTitle className="text-xl text-primary-dark">Add New Bill Payment</DialogTitle>
+                <DialogDescription className="text-gray-600">
+                  Set up a new bill payment with optional reminder
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Input type="text" placeholder="Bill Name" className="col-span-4 border-2 focus:border-primary" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Input type="number" placeholder="Amount" className="col-span-4 border-2 focus:border-primary" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Input type="date" placeholder="Due Date" className="col-span-4 border-2 focus:border-primary" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Select>
+                    <SelectTrigger className="col-span-4 border-2 focus:border-primary">
+                      <SelectValue placeholder="Category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="cat-5">Rent</SelectItem>
+                      <SelectItem value="cat-6">Utilities</SelectItem>
+                      <SelectItem value="cat-8">Entertainment</SelectItem>
+                      <SelectItem value="cat-10">Healthcare</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="flex items-center justify-between space-x-2">
+                  <Label htmlFor="recurring" className="font-medium">Recurring Bill</Label>
+                  <Switch id="recurring" />
+                </div>
+                <div className="flex items-center justify-between space-x-2">
+                  <Label htmlFor="reminder" className="font-medium">Set Reminder</Label>
+                  <Switch id="reminder" />
+                </div>
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Input type="number" placeholder="Amount" className="col-span-4" />
+              <DialogFooter>
+                <Button type="submit" className="bg-primary hover:bg-primary-dark">Save Bill</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+
+          <Dialog open={isReminderDialogOpen} onOpenChange={setIsReminderDialogOpen}>
+            <DialogTrigger asChild>
+              <Button variant="secondary" className="shadow-lg hover:shadow-xl transition-all duration-200">
+                <BellRing className="h-4 w-4 mr-2" />
+                Create Reminder
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-md bg-white/95 backdrop-blur-lg shadow-xl border-2 border-secondary/20">
+              <DialogHeader>
+                <DialogTitle className="text-xl text-secondary-dark">Create New Reminder</DialogTitle>
+                <DialogDescription className="text-gray-600">
+                  Set up a new reminder for any task or event
+                </DialogDescription>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Input type="text" placeholder="Reminder Title" className="col-span-4 border-2 focus:border-secondary" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Input type="date" placeholder="Date" className="col-span-4 border-2 focus:border-secondary" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Input type="time" placeholder="Time" className="col-span-4 border-2 focus:border-secondary" />
+                </div>
+                <div className="flex items-center justify-between space-x-2">
+                  <Label htmlFor="recurring-reminder" className="font-medium">Recurring Reminder</Label>
+                  <Switch id="recurring-reminder" />
+                </div>
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Input type="date" placeholder="Due Date" className="col-span-4" />
-              </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Select>
-                  <SelectTrigger className="col-span-4">
-                    <SelectValue placeholder="Category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="cat-5">Rent</SelectItem>
-                    <SelectItem value="cat-6">Utilities</SelectItem>
-                    <SelectItem value="cat-8">Entertainment</SelectItem>
-                    <SelectItem value="cat-10">Healthcare</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="flex items-center justify-between space-x-2">
-                <Label htmlFor="recurring">Recurring Bill</Label>
-                <Switch id="recurring" />
-              </div>
-              <div className="flex items-center justify-between space-x-2">
-                <Label htmlFor="autopay">Auto-pay Enabled</Label>
-                <Switch id="autopay" />
-              </div>
-            </div>
-            <DialogFooter>
-              <Button type="submit">Save Bill</Button>
-            </DialogFooter>
-          </DialogContent>
-        </Dialog>
+              <DialogFooter>
+                <Button type="submit" variant="secondary">Save Reminder</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
       </div>
 
       <Card>
