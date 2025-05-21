@@ -104,6 +104,11 @@
     --off-white: var(--gray-50);
     --white: #FFFFFF;
 
+    /* Colors for financial categories */
+    --income: var(--green-500);
+    --expense: var(--coral-500);
+    --saving: var(--sky-blue-500);
+    
     /*
     ========================================
     GRADIENTS
@@ -270,12 +275,12 @@
 
   /* Dashboard and portal vibrant backgrounds with subtle layered gradients */
   body {
-    @apply font-sans bg-gradient-to-br from-sky-100 via-cyan-100 to-green-100 text-gray-900;
+    @apply font-sans bg-gradient-to-br from-cyan-50 via-indigo-50 to-purple-50 text-gray-900;
   }
 
   #root {
-    @apply max-w-screen-xl mx-auto p-6 bg-white rounded-2xl shadow-lg;
-    background: var(--gradient-soft);
+    @apply max-w-screen-xl mx-auto p-6 bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg;
+    background: linear-gradient(135deg, rgba(224, 242, 254, 0.8), rgba(239, 246, 255, 0.8), rgba(248, 250, 252, 0.8));
   }
 
   /* Set fonts */
@@ -294,6 +299,12 @@
   /* Cards with slight translucent background and subtle shadows for vibrancy */
   .card {
     @apply bg-white/90 shadow-lg rounded-lg border border-gray-200;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    @apply shadow-xl;
+    transform: translateY(-3px);
   }
 
   /* Text gradients for headings or highlights */
@@ -303,6 +314,77 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
     color: transparent;
+  }
+  
+  /* Animation keyframes */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  /* Animation classes */
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out forwards;
+  }
+  
+  .animate-pulse {
+    animation: pulse 2s infinite;
+  }
+  
+  .animate-spin {
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Staggered animations */
+  .stagger-item:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-item:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-item:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-item:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-item:nth-child(5) { animation-delay: 0.5s; }
+  
+  /* Hover effects */
+  .hover-scale {
+    transition: transform 0.2s ease;
+  }
+  
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+  
+  .hover-glow {
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .hover-glow-primary:hover {
+    box-shadow: var(--glow-primary);
+  }
+  
+  .hover-glow-secondary:hover {
+    box-shadow: var(--glow-secondary);
+  }
+  
+  .hover-glow-accent:hover {
+    box-shadow: var(--glow-accent);
   }
 }
 
@@ -323,5 +405,9 @@
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar { display: none; }
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  
+  .glass-effect {
+    @apply bg-white/40 backdrop-blur-md border border-white/20 shadow-lg;
+  }
 }
 
