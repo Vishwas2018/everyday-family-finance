@@ -1,7 +1,5 @@
-
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   mockTransactions, 
@@ -9,11 +7,13 @@ import {
   mockFinancialSummary, 
   getCategoryName, 
   formatCurrency, 
-  formatDate 
+  formatDate,
+  getCategoryColor 
 } from "@/data/mockData";
-import { ArrowUpCircle, ArrowDownCircle, PiggyBank, CreditCard, ArrowRight } from "lucide-react";
+import { ArrowUpCircle, ArrowDownCircle, PiggyBank, CreditCard, ArrowRight, ChartPie } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
+import { ChartContainer, ChartTooltipContent, ChartTooltip } from "@/components/ui/chart";
 
 const Dashboard = () => {
   // Get recent transactions
@@ -26,6 +26,28 @@ const Dashboard = () => {
     .filter(bill => bill.status !== "paid")
     .sort((a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime())
     .slice(0, 3);
+
+  // Format category data for the pie chart
+  const categoryData = mockFinancialSummary.categoryBreakdown.map((category) => ({
+    name: getCategoryName(category.categoryId),
+    value: category.amount,
+    color: getCategoryColor(category.categoryId),
+    percentage: category.percentage,
+  }));
+
+  // Custom tooltip for pie chart
+  const CustomTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-background p-3 border rounded-lg shadow-sm animate-fade-in">
+          <p className="font-medium">{payload[0].name}</p>
+          <p className="text-sm">{formatCurrency(payload[0].value)}</p>
+          <p className="text-xs text-muted-foreground">{payload[0].payload.percentage}% of expenses</p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -266,30 +288,54 @@ const Dashboard = () => {
         </CardFooter>
       </Card>
 
-      {/* Budget Progress */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Budget Progress</CardTitle>
-          <CardDescription>This month's spending by category</CardDescription>
+      {/* Budget Progress with Pie Chart */}
+      <Card className="animate-enter">
+        <CardHeader className="flex flex-row items-center justify-between">
+          <div>
+            <CardTitle>Budget Progress</CardTitle>
+            <CardDescription>This month's spending by category</CardDescription>
+          </div>
+          <ChartPie className="h-5 w-5 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            {mockFinancialSummary.categoryBreakdown.map((category) => (
-              <div key={category.categoryId} className="space-y-1">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium">
-                    {getCategoryName(category.categoryId)}
-                  </span>
-                  <span className="text-sm font-medium">
-                    {formatCurrency(category.amount)}
-                  </span>
+          <div className="h-[300px] flex flex-col md:flex-row items-center justify-center">
+            <div className="w-full md:w-1/2 h-full">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={categoryData}
+                    cx="50%"
+                    cy="50%"
+                    labelLine={false}
+                    outerRadius={90}
+                    fill="#8884d8"
+                    dataKey="value"
+                    className="animate-fade-in"
+                  >
+                    {categoryData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip content={<CustomTooltip />} />
+                  <Legend formatter={(value) => <span className="text-xs">{value}</span>} />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="w-full md:w-1/2 space-y-2 mt-4 md:mt-0 glass p-4 animate-fade-in">
+              <h4 className="text-sm font-medium mb-2">Category Breakdown</h4>
+              {categoryData.sort((a, b) => b.value - a.value).map((category) => (
+                <div key={category.name} className="flex items-center justify-between hover:bg-background/50 p-1 rounded-md transition-colors">
+                  <div className="flex items-center">
+                    <div
+                      className="w-3 h-3 rounded-full mr-2"
+                      style={{ backgroundColor: category.color }}
+                    />
+                    <span className="text-xs">{category.name}</span>
+                  </div>
+                  <span className="text-xs font-medium">{formatCurrency(category.value)}</span>
                 </div>
-                <Progress value={category.percentage} className="h-2" />
-                <div className="flex justify-between text-xs text-muted-foreground">
-                  <span>{category.percentage}% of expenses</span>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </CardContent>
       </Card>
