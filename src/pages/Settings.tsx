@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -20,7 +19,7 @@ const Settings = () => {
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Desktop Sidebar Navigation */}
           <div className="hidden lg:block w-[200px] shrink-0">
-            <div className="space-y-1">
+            <TabsList className="flex flex-col h-auto bg-transparent space-y-1 p-0">
               <TabsTrigger
                 value="profile"
                 className="w-full justify-start px-3 py-2 h-auto font-normal text-left bg-transparent border-0 data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:bg-muted"
@@ -63,7 +62,7 @@ const Settings = () => {
                 <HelpCircle className="w-4 h-4 mr-2" />
                 Help & Support
               </TabsTrigger>
-            </div>
+            </TabsList>
           </div>
 
           {/* Mobile Horizontal Navigation */}
