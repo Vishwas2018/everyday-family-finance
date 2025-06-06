@@ -10,115 +10,64 @@
 */
 @layer base {
   :root {
-    /* Primary palette */
-    --sky-blue-50: #EFF9FF;
-    --sky-blue-100: #DEF3FF;
-    --sky-blue-200: #B8E8FF;
-    --sky-blue-300: #8DDAFF;
-    --sky-blue-400: #6ECFFF; /* Primary */
-    --sky-blue-500: #4BA3FF;
-    --sky-blue-600: #3B8AE5;
-    --sky-blue-700: #2C72CC;
-    --sky-blue-800: #1D5BA3;
-    --sky-blue-900: #0E447A;
+    /* Primary palette - Blue theme */
+    --primary: 215 95% 65%;      /* Blue 400 */
+    --primary-light: 215 100% 80%;
+    --primary-dark: 215 95% 55%;
 
-    /* Secondary palette */
-    --coral-50: #FFF5F2;
-    --coral-100: #FFEBE5;
-    --coral-200: #FFD6CC;
-    --coral-300: #FFBDA7;
-    --coral-400: #FF9E80; /* Secondary */
-    --coral-500: #FF7D57;
-    --coral-600: #E56E4E;
-    --coral-700: #CC5E45;
-    --coral-800: #A34B38;
-    --coral-900: #7A392B;
+    /* Secondary palette - Neutral grays */
+    --secondary: 215 20% 85%;    /* Light gray with blue tint */
+    --secondary-light: 215 20% 95%;
+    --secondary-dark: 215 20% 70%;
 
-    /* Accent palette */
-    --green-50: #F2FBF0;
-    --green-100: #E5F7E0;
-    --green-200: #CCF0C2;
-    --green-300: #A5F284;
-    --green-400: #7ED957; /* Accent */
-    --green-500: #5BB039;
-    --green-600: #4C9330;
-    --green-700: #3D7627;
-    --green-800: #2E591E;
-    --green-900: #1F3D15;
-
-    /* Highlight palette */
-    --yellow-50: #FFFDF0;
-    --yellow-100: #FFFBE0;
-    --yellow-200: #FFF7C2;
-    --yellow-300: #FFF295;
-    --yellow-400: #FFDE59; /* Highlight */
-    --yellow-500: #FFCE29;
-    --yellow-600: #E5B825;
-    --yellow-700: #CC9F21;
-    --yellow-800: #A3781C;
-    --yellow-900: #7A5A16;
+    /* Accent palette - Subtle blue accent */
+    --accent: 215 85% 70%;
+    --accent-light: 215 85% 85%;
+    --accent-dark: 215 85% 60%;
 
     /* Neutral grayscale */
-    --gray-50: #F9FDFF; /* Off-white */
-    --gray-100: #E4F0F7; /* Light gray */
-    --gray-200: #D1E2EC;
-    --gray-300: #A4B8C4; /* Medium gray */
-    --gray-400: #8AA6B5;
-    --gray-500: #6B8A99; /* Dark gray */
-    --gray-600: #5A7580;
-    --gray-700: #4B5D67; /* Dark */
-    --gray-800: #36444C;
-    --gray-900: #222B30;
+    --gray-50: 215 25% 97%;     /* Very light blue-gray */
+    --gray-100: 215 20% 93%;
+    --gray-200: 215 15% 85%;
+    --gray-300: 215 10% 70%;
+    --gray-400: 215 8% 55%;
+    --gray-500: 215 8% 45%;
+    --gray-600: 215 10% 35%;
+    --gray-700: 215 15% 25%;
+    --gray-800: 215 20% 15%;
+    --gray-900: 215 25% 8%;
 
     /* Semantic colors */
-    --success: var(--green-500);
-    --success-light: var(--green-100);
-    --warning: var(--yellow-500);
-    --warning-light: var(--yellow-100);
-    --error: #e53e3e;
-    --error-light: #FEE2E2;
-    --info: var(--sky-blue-500);
-    --info-light: var(--sky-blue-100);
+    --success: 142 76% 36%;      /* Green 600 */
+    --success-light: 142 69% 85%;
+    --warning: 45 93% 47%;       /* Amber 500 */
+    --warning-light: 45 93% 85%;
+    --error: 0 84% 60%;          /* Red 500 */
+    --error-light: 0 84% 90%;
+    --info: var(--primary);
+    --info-light: var(--primary-light);
 
     /* Functional color aliases */
-    --primary: var(--sky-blue-400);
-    --primary-light: var(--sky-blue-200);
-    --primary-dark: var(--sky-blue-500);
-
-    --secondary: var(--coral-400);
-    --secondary-light: var(--coral-300);
-    --secondary-dark: var(--coral-500);
-
-    --accent: var(--green-400);
-    --accent-light: var(--green-300);
-    --accent-dark: var(--green-500);
-
-    --highlight: var(--yellow-400);
-    --highlight-light: var(--yellow-300);
-    --highlight-dark: var(--yellow-500);
-
-    --dark: var(--gray-700);
-    --dark-gray: var(--gray-500);
-    --medium-gray: var(--gray-300);
-    --light-gray: var(--gray-100);
-    --off-white: var(--gray-50);
-    --white: #FFFFFF;
-
-    /* Colors for financial categories */
-    --income: var(--green-500);
-    --expense: var(--coral-500);
-    --saving: var(--sky-blue-500);
+    --income: var(--success);
+    --expense: var(--error);
+    --saving: var(--primary);
     
-    /*
-    ========================================
-    GRADIENTS
-    ========================================
-    */
-    --gradient-primary: linear-gradient(90deg, var(--primary), var(--accent));
-    --gradient-secondary: linear-gradient(90deg, var(--secondary), var(--highlight));
-    --gradient-wild: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent), #B39DDB);
-    --gradient-fun: linear-gradient(135deg, var(--highlight), var(--accent), var(--primary));
-    --gradient-soft: linear-gradient(90deg, #E0F7FF, #FFF5E0, #E8F5E0);
+    /* Background and text */
+    --background: 0 0% 100%;
+    --foreground: var(--gray-900);
+    --muted: var(--gray-100);
+    --muted-foreground: var(--gray-500);
+    --border: var(--gray-200);
+    --input: var(--gray-200);
+    --ring: var(--primary);
+    
+    /* Card colors */
+    --card: 0 0% 100%;
+    --card-foreground: var(--gray-900);
+    
+    /* Popover colors */
+    --popover: 0 0% 100%;
+    --popover-foreground: var(--gray-900);
 
     /*
     ========================================
@@ -126,265 +75,126 @@
     ========================================
     */
     /* Font families */
-    --font-primary: 'Nunito', sans-serif;
-    --font-heading: 'Comic Neue', cursive;
+    --font-primary: 'Inter', 'Nunito', sans-serif;
+    --font-heading: 'Inter', 'Nunito', sans-serif;
     --font-mono: 'Monaco', 'Consolas', monospace;
 
-    /* Font sizes - with fluid typography using clamp() */
-    --text-xs: clamp(0.7rem, 0.7rem + 0.1vw, 0.75rem);       /* 11.2px - 12px */
-    --text-sm: clamp(0.75rem, 0.75rem + 0.25vw, 0.875rem);   /* 12px - 14px */
-    --text-base: clamp(0.875rem, 0.875rem + 0.25vw, 1rem);   /* 14px - 16px */
-    --text-md: clamp(1rem, 1rem + 0.5vw, 1.125rem);          /* 16px - 18px */
-    --text-lg: clamp(1.125rem, 1.125rem + 0.5vw, 1.25rem);   /* 18px - 20px */
-    --text-xl: clamp(1.25rem, 1.25rem + 0.5vw, 1.5rem);      /* 20px - 24px */
-    --text-2xl: clamp(1.5rem, 1.5rem + 1vw, 1.875rem);       /* 24px - 30px */
-    --text-3xl: clamp(1.875rem, 1.875rem + 1vw, 2.25rem);    /* 30px - 36px */
-    --text-4xl: clamp(2.25rem, 2.25rem + 1.5vw, 3rem);       /* 36px - 48px */
-    --text-5xl: clamp(3rem, 3rem + 2vw, 3.75rem);            /* 48px - 60px */
-    --text-6xl: clamp(3.75rem, 3.75rem + 2.5vw, 4.5rem);     /* 60px - 72px */
-
-    /* Heading-specific sizes */
-    --text-h1: var(--text-4xl);
-    --text-h2: var(--text-3xl);
-    --text-h3: var(--text-2xl);
-    --text-h4: var(--text-xl);
-    --text-h5: var(--text-lg);
-    --text-h6: var(--text-md);
-
-    /* Font weights */
-    --weight-light: 300;
-    --weight-normal: 400;
-    --weight-medium: 600;
-    --weight-semibold: 600;
-    --weight-bold: 700;
-    --weight-extrabold: 800;
-
-    /* Line heights */
-    --leading-none: 1;
-    --leading-tight: 1.2;
-    --leading-snug: 1.375;
-    --leading-normal: 1.5;
-    --leading-relaxed: 1.625;
-    --leading-loose: 2;
-
-    /* Letter spacing */
-    --tracking-tighter: -0.05em;
-    --tracking-tight: -0.025em;
-    --tracking-normal: 0;
-    --tracking-wide: 0.025em;
-    --tracking-wider: 0.05em;
-    --tracking-widest: 0.1em;
+    /* Font sizes */
+    --text-xs: clamp(0.7rem, 0.7rem + 0.1vw, 0.75rem);
+    --text-sm: clamp(0.75rem, 0.75rem + 0.25vw, 0.875rem);
+    --text-base: clamp(0.875rem, 0.875rem + 0.25vw, 1rem);
+    --text-md: clamp(1rem, 1rem + 0.5vw, 1.125rem);
+    --text-lg: clamp(1.125rem, 1.125rem + 0.5vw, 1.25rem);
+    --text-xl: clamp(1.25rem, 1.25rem + 0.5vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 1.5rem + 1vw, 1.875rem);
+    --text-3xl: clamp(1.875rem, 1.875rem + 1vw, 2.25rem);
+    --text-4xl: clamp(2.25rem, 2.25rem + 1.5vw, 3rem);
 
     /*
     ========================================
-    SPACING SCALE
+    SPACING & LAYOUT
     ========================================
     */
-    --space-0: 0;
-    --space-1: 0.25rem;    /* 4px */
-    --space-2: 0.5rem;     /* 8px */
-    --space-3: 0.75rem;    /* 12px */
-    --space-4: 1rem;       /* 16px */
-    --space-5: 1.25rem;    /* 20px */
-    --space-6: 1.5rem;     /* 24px */
-    --space-8: 2rem;       /* 32px */
-    --space-10: 2.5rem;    /* 40px */
-    --space-12: 3rem;      /* 48px */
-    --space-16: 4rem;      /* 64px */
-    --space-20: 5rem;      /* 80px */
-    --space-24: 6rem;      /* 96px */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
 
     /*
     ========================================
     SHADOWS & EFFECTS
     ========================================
     */
-    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
-    --shadow-xl: 0 12px 36px rgba(0, 0, 0, 0.15);
-
-    /* Fun and themed shadows */
-    --shadow-fun: 0 8px 0 rgba(0, 0, 0, 0.1);
-    --shadow-fun-sm: 0 4px 0 rgba(0, 0, 0, 0.1);
-    --shadow-fun-lg: 0 12px 0 rgba(0, 0, 0, 0.1);
-
-    /* Glow effects */
-    --glow-primary: 0 0 15px rgba(110, 207, 255, 0.5);
-    --glow-secondary: 0 0 15px rgba(255, 158, 128, 0.5);
-    --glow-accent: 0 0 15px rgba(126, 217, 87, 0.5);
-    --glow-highlight: 0 0 15px rgba(255, 222, 89, 0.5);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
 
     /*
     ========================================
     BORDER RADIUS
     ========================================
     */
-    --radius-none: 0;
-    --radius-xs: 3px;
     --radius-sm: 6px;
-    --radius-md: 12px;
-    --radius-lg: 20px;
-    --radius-xl: 28px;
-    --radius-2xl: 36px;
-    --radius-full: 9999px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
 
     /*
     ========================================
-    TRANSITIONS & ANIMATIONS
+    TRANSITIONS
     ========================================
     */
-    --duration-instant: 0.1s;
-    --duration-fast: 0.2s;
-    --duration-normal: 0.3s;
-    --duration-slow: 0.5s;
-    --duration-slower: 0.8s;
-
-    /* Easing curves */
-    --ease-linear: linear;
-    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --duration-fast: 0.15s;
+    --duration-normal: 0.2s;
+    --duration-slow: 0.3s;
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
-    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-    /* Transition presets */
-    --transition-fast: all var(--duration-fast) var(--ease-in-out);
-    --transition-normal: all var(--duration-normal) var(--ease-in-out);
-    --transition-slow: all var(--duration-slow) var(--ease-in-out);
-    --transition-bounce: all var(--duration-slow) var(--ease-bounce);
-
-    /*
-    ========================================
-    Z-INDEX LAYERS
-    ========================================
-    */
-    --z-negative: -1;
-    --z-base: 0;
-    --z-raised: 10;
-    --z-dropdown: 20;
-    --z-sticky: 30;
-    --z-fixed: 40;
-    --z-modal-backdrop: 50;
-    --z-modal: 60;
-    --z-popover: 70;
-    --z-tooltip: 80;
-    --z-toast: 90;
-    --z-top: 100;
   }
 
-  /* Dashboard and portal vibrant backgrounds with subtle layered gradients */
+  /* Clean background */
   body {
-    @apply font-sans bg-gradient-to-br from-cyan-50 via-indigo-50 to-purple-50 text-gray-900;
+    @apply font-sans bg-gray-50 text-foreground;
   }
 
   #root {
-    @apply max-w-screen-xl mx-auto p-6 bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg;
-    background: linear-gradient(135deg, rgba(224, 242, 254, 0.8), rgba(239, 246, 255, 0.8), rgba(248, 250, 252, 0.8));
+    @apply max-w-screen-2xl mx-auto bg-background shadow-sm;
+    min-height: 100vh;
   }
 
-  /* Set fonts */
-  html, body {
-    font-family: var(--font-primary);
-  }
-
+  /* Typography */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    font-weight: 600;
   }
 
-  code, pre, .font-mono {
-    font-family: var(--font-mono);
-  }
-
-  /* Cards with slight translucent background and subtle shadows for vibrancy */
+  /* Card styling */
   .card {
-    @apply bg-white/90 shadow-lg rounded-lg border border-gray-200;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    @apply bg-card border border-border shadow-sm rounded-lg;
+    transition: box-shadow var(--duration-normal) var(--ease-out);
   }
   
   .card:hover {
-    @apply shadow-xl;
-    transform: translateY(-3px);
+    @apply shadow-md;
   }
 
-  /* Text gradients for headings or highlights */
-  .text-gradient-primary {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
-  }
-  
   /* Animation keyframes */
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
   }
   
   @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
-  }
-  
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
-  
-  @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
   }
   
   /* Animation classes */
   .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
+    animation: fadeIn 0.4s ease-out forwards;
   }
   
   .animate-slide-up {
     animation: slideUp 0.5s ease-out forwards;
   }
   
-  .animate-pulse {
-    animation: pulse 2s infinite;
-  }
-  
-  .animate-spin {
-    animation: spin 2s linear infinite;
-  }
-  
   /* Staggered animations */
-  .stagger-item:nth-child(1) { animation-delay: 0.1s; }
-  .stagger-item:nth-child(2) { animation-delay: 0.2s; }
-  .stagger-item:nth-child(3) { animation-delay: 0.3s; }
-  .stagger-item:nth-child(4) { animation-delay: 0.4s; }
-  .stagger-item:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-item:nth-child(1) { animation-delay: 0.05s; }
+  .stagger-item:nth-child(2) { animation-delay: 0.1s; }
+  .stagger-item:nth-child(3) { animation-delay: 0.15s; }
+  .stagger-item:nth-child(4) { animation-delay: 0.2s; }
+  .stagger-item:nth-child(5) { animation-delay: 0.25s; }
   
   /* Hover effects */
   .hover-scale {
-    transition: transform 0.2s ease;
+    transition: transform var(--duration-fast) var(--ease-out);
   }
   
   .hover-scale:hover {
-    transform: scale(1.05);
-  }
-  
-  .hover-glow {
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .hover-glow-primary:hover {
-    box-shadow: var(--glow-primary);
-  }
-  
-  .hover-glow-secondary:hover {
-    box-shadow: var(--glow-secondary);
-  }
-  
-  .hover-glow-accent:hover {
-    box-shadow: var(--glow-accent);
+    transform: scale(1.02);
   }
 }
 
@@ -392,22 +202,9 @@
   * {
     @apply border-border;
   }
-
-  body {
-    @apply bg-background text-foreground;
-    font-family: var(--font-primary);
-    font-size: var(--text-base);
-    font-smooth: always;
-    background-image: var(--gradient-soft);
-  }
 }
 
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar { display: none; }
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-  
-  .glass-effect {
-    @apply bg-white/40 backdrop-blur-md border border-white/20 shadow-lg;
-  }
 }
-
