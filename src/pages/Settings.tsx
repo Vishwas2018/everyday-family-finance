@@ -14,64 +14,68 @@ import { User, Lock, Bell, CreditCard, Shield, HelpCircle } from "lucide-react";
 const Settings = () => {
   return (
     <div className="space-y-6 animate-fade-in">
-      <h1 className="text-2xl font-bold">Settings</h1>
+      <h1 className="text-2xl font-bold text-foreground">Settings</h1>
 
-      <Tabs defaultValue="profile">
-        <div className="flex">
-          <div className="hidden md:block w-[200px] shrink-0 mr-6">
-            <TabsList className="flex flex-col items-start h-auto p-0 bg-transparent">
+      <Tabs defaultValue="profile" className="w-full">
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Desktop Sidebar Navigation */}
+          <div className="hidden lg:block w-[200px] shrink-0">
+            <div className="space-y-1">
               <TabsTrigger
                 value="profile"
-                className="w-full justify-start px-2 py-1.5 h-9 font-normal data-[state=active]:bg-muted"
+                className="w-full justify-start px-3 py-2 h-auto font-normal text-left bg-transparent border-0 data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:bg-muted"
               >
                 <User className="w-4 h-4 mr-2" />
                 Profile
               </TabsTrigger>
               <TabsTrigger
                 value="account"
-                className="w-full justify-start px-2 py-1.5 h-9 font-normal data-[state=active]:bg-muted"
+                className="w-full justify-start px-3 py-2 h-auto font-normal text-left bg-transparent border-0 data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:bg-muted"
               >
                 <Lock className="w-4 h-4 mr-2" />
                 Account
               </TabsTrigger>
               <TabsTrigger
                 value="notifications"
-                className="w-full justify-start px-2 py-1.5 h-9 font-normal data-[state=active]:bg-muted"
+                className="w-full justify-start px-3 py-2 h-auto font-normal text-left bg-transparent border-0 data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:bg-muted"
               >
                 <Bell className="w-4 h-4 mr-2" />
                 Notifications
               </TabsTrigger>
               <TabsTrigger
                 value="payment"
-                className="w-full justify-start px-2 py-1.5 h-9 font-normal data-[state=active]:bg-muted"
+                className="w-full justify-start px-3 py-2 h-auto font-normal text-left bg-transparent border-0 data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:bg-muted"
               >
                 <CreditCard className="w-4 h-4 mr-2" />
                 Payment Methods
               </TabsTrigger>
               <TabsTrigger
                 value="privacy"
-                className="w-full justify-start px-2 py-1.5 h-9 font-normal data-[state=active]:bg-muted"
+                className="w-full justify-start px-3 py-2 h-auto font-normal text-left bg-transparent border-0 data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:bg-muted"
               >
                 <Shield className="w-4 h-4 mr-2" />
                 Privacy & Security
               </TabsTrigger>
               <TabsTrigger
                 value="help"
-                className="w-full justify-start px-2 py-1.5 h-9 font-normal data-[state=active]:bg-muted"
+                className="w-full justify-start px-3 py-2 h-auto font-normal text-left bg-transparent border-0 data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:bg-muted"
               >
                 <HelpCircle className="w-4 h-4 mr-2" />
                 Help & Support
               </TabsTrigger>
-            </TabsList>
+            </div>
           </div>
-          <TabsList className="flex md:hidden mb-4">
-            <TabsTrigger value="profile">Profile</TabsTrigger>
-            <TabsTrigger value="account">Account</TabsTrigger>
-            <TabsTrigger value="notifications">Notifications</TabsTrigger>
+
+          {/* Mobile Horizontal Navigation */}
+          <TabsList className="flex lg:hidden mb-4 bg-muted p-1">
+            <TabsTrigger value="profile" className="text-xs">Profile</TabsTrigger>
+            <TabsTrigger value="account" className="text-xs">Account</TabsTrigger>
+            <TabsTrigger value="notifications" className="text-xs">Notifications</TabsTrigger>
           </TabsList>
 
-          <div className="flex-1">
-            <TabsContent value="profile">
+          {/* Content Area */}
+          <div className="flex-1 min-w-0">
+            <TabsContent value="profile" className="mt-0">
               <Card>
                 <CardHeader>
                   <CardTitle>Profile Information</CardTitle>
@@ -80,25 +84,25 @@ const Settings = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="flex flex-col md:flex-row gap-6">
+                  <div className="flex flex-col sm:flex-row gap-6">
                     <div className="flex flex-col items-center gap-2">
-                      <Avatar className="h-24 w-24">
+                      <Avatar className="h-20 w-20 sm:h-24 sm:w-24">
                         <AvatarImage src="/avatar.jpg" alt={mockUser.name} />
-                        <AvatarFallback>
+                        <AvatarFallback className="bg-primary/10 text-primary">
                           {mockUser.name.split(' ').map(n => n[0]).join('')}
                         </AvatarFallback>
                       </Avatar>
-                      <Button variant="outline" size="sm">Change Photo</Button>
+                      <Button variant="outline" size="sm" className="text-xs">Change Photo</Button>
                     </div>
                     <div className="space-y-4 flex-1">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <Label htmlFor="firstName">First Name</Label>
                           <Input id="firstName" defaultValue={mockUser.name.split(' ')[0]} />
                         </div>
                         <div className="space-y-2">
                           <Label htmlFor="lastName">Last Name</Label>
-                          <Input id="lastName" defaultValue={mockUser.name.split(' ')[1]} />
+                          <Input id="lastName" defaultValue={mockUser.name.split(' ')[1] || ''} />
                         </div>
                       </div>
                       <div className="space-y-2">
@@ -122,14 +126,14 @@ const Settings = () => {
                     </p>
                   </div>
                 </CardContent>
-                <CardFooter className="flex justify-end gap-2">
-                  <Button variant="outline">Cancel</Button>
-                  <Button>Save Changes</Button>
+                <CardFooter className="flex flex-col sm:flex-row justify-end gap-2">
+                  <Button variant="outline" className="w-full sm:w-auto">Cancel</Button>
+                  <Button className="w-full sm:w-auto">Save Changes</Button>
                 </CardFooter>
               </Card>
             </TabsContent>
 
-            <TabsContent value="account">
+            <TabsContent value="account" className="mt-0">
               <Card>
                 <CardHeader>
                   <CardTitle>Account Settings</CardTitle>
@@ -162,25 +166,25 @@ const Settings = () => {
                   <div className="space-y-4">
                     <h3 className="text-lg font-medium">Preferences</h3>
                     <div className="space-y-4">
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                         <div className="space-y-0.5">
                           <Label htmlFor="currency">Default Currency</Label>
                           <p className="text-sm text-muted-foreground">
                             Choose your preferred currency for displaying amounts
                           </p>
                         </div>
-                        <div className="w-[180px]">
+                        <div className="w-full sm:w-[180px]">
                           <Input id="currency" defaultValue="USD" />
                         </div>
                       </div>
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                         <div className="space-y-0.5">
                           <Label htmlFor="language">Language</Label>
                           <p className="text-sm text-muted-foreground">
                             Choose your preferred language
                           </p>
                         </div>
-                        <div className="w-[180px]">
+                        <div className="w-full sm:w-[180px]">
                           <Input id="language" defaultValue="English" />
                         </div>
                       </div>
@@ -190,16 +194,16 @@ const Settings = () => {
                   <Separator />
 
                   <div className="space-y-4">
-                    <h3 className="text-lg font-medium">Danger Zone</h3>
+                    <h3 className="text-lg font-medium text-destructive">Danger Zone</h3>
                     <div className="space-y-4">
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                         <div className="space-y-0.5">
                           <p className="font-medium">Delete Account</p>
                           <p className="text-sm text-muted-foreground">
                             Permanently delete your account and all your data
                           </p>
                         </div>
-                        <Button variant="destructive">Delete Account</Button>
+                        <Button variant="destructive" className="w-full sm:w-auto">Delete Account</Button>
                       </div>
                     </div>
                   </div>
@@ -207,7 +211,7 @@ const Settings = () => {
               </Card>
             </TabsContent>
 
-            <TabsContent value="notifications">
+            <TabsContent value="notifications" className="mt-0">
               <Card>
                 <CardHeader>
                   <CardTitle>Notification Settings</CardTitle>
@@ -220,7 +224,7 @@ const Settings = () => {
                     <h3 className="text-lg font-medium">Email Notifications</h3>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <div className="space-y-0.5">
+                        <div className="space-y-0.5 flex-1 mr-4">
                           <Label htmlFor="bill-reminder">Bill Reminders</Label>
                           <p className="text-sm text-muted-foreground">
                             Get notified before bills are due
@@ -229,7 +233,7 @@ const Settings = () => {
                         <Switch id="bill-reminder" defaultChecked />
                       </div>
                       <div className="flex items-center justify-between">
-                        <div className="space-y-0.5">
+                        <div className="space-y-0.5 flex-1 mr-4">
                           <Label htmlFor="budget-alert">Budget Alerts</Label>
                           <p className="text-sm text-muted-foreground">
                             Get notified when you're approaching your budget limits
@@ -238,7 +242,7 @@ const Settings = () => {
                         <Switch id="budget-alert" defaultChecked />
                       </div>
                       <div className="flex items-center justify-between">
-                        <div className="space-y-0.5">
+                        <div className="space-y-0.5 flex-1 mr-4">
                           <Label htmlFor="transaction-alert">Transaction Alerts</Label>
                           <p className="text-sm text-muted-foreground">
                             Get notified for new transactions above a certain amount
@@ -247,7 +251,7 @@ const Settings = () => {
                         <Switch id="transaction-alert" />
                       </div>
                       <div className="flex items-center justify-between">
-                        <div className="space-y-0.5">
+                        <div className="space-y-0.5 flex-1 mr-4">
                           <Label htmlFor="weekly-summary">Weekly Summary</Label>
                           <p className="text-sm text-muted-foreground">
                             Receive a weekly summary of your financial activity
@@ -264,7 +268,7 @@ const Settings = () => {
                     <h3 className="text-lg font-medium">Push Notifications</h3>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <div className="space-y-0.5">
+                        <div className="space-y-0.5 flex-1 mr-4">
                           <Label htmlFor="push-bill-reminder">Bill Reminders</Label>
                           <p className="text-sm text-muted-foreground">
                             Get push notifications before bills are due
@@ -273,7 +277,7 @@ const Settings = () => {
                         <Switch id="push-bill-reminder" defaultChecked />
                       </div>
                       <div className="flex items-center justify-between">
-                        <div className="space-y-0.5">
+                        <div className="space-y-0.5 flex-1 mr-4">
                           <Label htmlFor="push-budget-alert">Budget Alerts</Label>
                           <p className="text-sm text-muted-foreground">
                             Get push notifications for budget limits
@@ -285,8 +289,60 @@ const Settings = () => {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <Button>Save Preferences</Button>
+                  <Button className="w-full sm:w-auto">Save Preferences</Button>
                 </CardFooter>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="payment" className="mt-0">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Payment Methods</CardTitle>
+                  <CardDescription>
+                    Manage your payment methods and billing information
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center py-8 text-muted-foreground">
+                    <CreditCard className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <p>No payment methods configured yet.</p>
+                    <Button className="mt-4">Add Payment Method</Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="privacy" className="mt-0">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Privacy & Security</CardTitle>
+                  <CardDescription>
+                    Control your privacy settings and security preferences
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center py-8 text-muted-foreground">
+                    <Shield className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <p>Privacy settings will be available soon.</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="help" className="mt-0">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Help & Support</CardTitle>
+                  <CardDescription>
+                    Get help and contact our support team
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center py-8 text-muted-foreground">
+                    <HelpCircle className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <p>Support documentation and contact options coming soon.</p>
+                  </div>
+                </CardContent>
               </Card>
             </TabsContent>
           </div>
