@@ -28,13 +28,81 @@ export const mockCategories: CategoryType[] = [
   { id: "cat-8", name: "Entertainment", color: "#2196F3", type: "expense" },
   { id: "cat-9", name: "Dining Out", color: "#E91E63", type: "expense" },
   { id: "cat-10", name: "Healthcare", color: "#607D8B", type: "expense" },
+  { id: "cat-11", name: "Travel", color: "#FF9800", type: "expense" },
+];
+
+// Mock travel expenses data
+export const mockTravelExpenses = [
+  {
+    id: "travel-1",
+    destination: "Paris, France",
+    amount: 2450,
+    startDate: "2023-05-15",
+    endDate: "2023-05-22",
+    status: "completed",
+    category: "Vacation"
+  },
+  {
+    id: "travel-2",
+    destination: "Tokyo, Japan",
+    amount: 3200,
+    startDate: "2023-08-10",
+    endDate: "2023-08-18",
+    status: "planned",
+    category: "Vacation"
+  },
+  {
+    id: "travel-3",
+    destination: "New York, NY",
+    amount: 800,
+    startDate: "2023-06-05",
+    endDate: "2023-06-08",
+    status: "completed",
+    category: "Business"
+  }
+];
+
+// Mock savings goals data
+export const mockSavingsGoals = [
+  {
+    id: "savings-1",
+    name: "Emergency Fund",
+    targetAmount: 15000,
+    currentAmount: 8500,
+    targetDate: "2024-12-31",
+    priority: "high"
+  },
+  {
+    id: "savings-2",
+    name: "New Car",
+    targetAmount: 25000,
+    currentAmount: 12000,
+    targetDate: "2024-06-30",
+    priority: "medium"
+  },
+  {
+    id: "savings-3",
+    name: "House Down Payment",
+    targetAmount: 50000,
+    currentAmount: 18500,
+    targetDate: "2025-12-31",
+    priority: "high"
+  },
+  {
+    id: "savings-4",
+    name: "Vacation Fund",
+    targetAmount: 5000,
+    currentAmount: 3200,
+    targetDate: "2024-03-31",
+    priority: "low"
+  }
 ];
 
 // Mock transactions
 export const mockTransactions: Transaction[] = [
   {
     id: "txn-1",
-    amount: 0,
+    amount: 5200,
     description: "Monthly Salary",
     date: "2023-06-01",
     type: "income",
@@ -46,7 +114,7 @@ export const mockTransactions: Transaction[] = [
   },
   {
     id: "txn-2",
-    amount: 0,
+    amount: 1500,
     description: "Freelance Project",
     date: "2023-06-10",
     type: "income",
@@ -57,7 +125,7 @@ export const mockTransactions: Transaction[] = [
   },
   {
     id: "txn-3",
-    amount: 0,
+    amount: 250,
     description: "Dividend Payment",
     date: "2023-06-15",
     type: "income",
@@ -68,7 +136,7 @@ export const mockTransactions: Transaction[] = [
   },
   {
     id: "txn-4",
-    amount: 0,
+    amount: 320,
     description: "Grocery Shopping",
     date: "2023-06-05",
     type: "expense",
@@ -79,7 +147,7 @@ export const mockTransactions: Transaction[] = [
   },
   {
     id: "txn-5",
-    amount: 0,
+    amount: 1800,
     description: "Monthly Rent",
     date: "2023-06-03",
     type: "expense",
@@ -91,7 +159,7 @@ export const mockTransactions: Transaction[] = [
   },
   {
     id: "txn-6",
-    amount: 0,
+    amount: 150,
     description: "Electricity Bill",
     date: "2023-06-08",
     type: "expense",
@@ -103,7 +171,7 @@ export const mockTransactions: Transaction[] = [
   },
   {
     id: "txn-7",
-    amount: 0,
+    amount: 80,
     description: "Gas & Fuel",
     date: "2023-06-12",
     type: "expense",
@@ -114,7 +182,7 @@ export const mockTransactions: Transaction[] = [
   },
   {
     id: "txn-8",
-    amount: 0,
+    amount: 45,
     description: "Movie Night",
     date: "2023-06-18",
     type: "expense",
@@ -125,7 +193,7 @@ export const mockTransactions: Transaction[] = [
   },
   {
     id: "txn-9",
-    amount: 0,
+    amount: 120,
     description: "Restaurant Dinner",
     date: "2023-06-20",
     type: "expense",
@@ -136,7 +204,7 @@ export const mockTransactions: Transaction[] = [
   },
   {
     id: "txn-10",
-    amount: 0,
+    amount: 200,
     description: "Doctor's Appointment",
     date: "2023-06-25",
     type: "expense",
@@ -145,6 +213,17 @@ export const mockTransactions: Transaction[] = [
     createdAt: "2023-06-25T13:00:00Z",
     updatedAt: "2023-06-25T13:00:00Z",
   },
+  {
+    id: "txn-11",
+    amount: 800,
+    description: "Business Trip to NYC",
+    date: "2023-06-05",
+    type: "expense",
+    categoryId: "cat-11",
+    isRecurring: false,
+    createdAt: "2023-06-05T13:00:00Z",
+    updatedAt: "2023-06-05T13:00:00Z",
+  },
 ];
 
 // Mock bills and reminders
@@ -152,7 +231,7 @@ export const mockBills: Bill[] = [
   {
     id: "bill-1",
     name: "Rent",
-    amount: 0,
+    amount: 1800,
     dueDate: "2023-07-01",
     categoryId: "cat-5",
     isRecurring: true,
@@ -163,7 +242,7 @@ export const mockBills: Bill[] = [
   {
     id: "bill-2",
     name: "Electricity",
-    amount: 0,
+    amount: 150,
     dueDate: "2023-07-10",
     categoryId: "cat-6",
     isRecurring: true,
@@ -174,7 +253,7 @@ export const mockBills: Bill[] = [
   {
     id: "bill-3",
     name: "Internet",
-    amount: 0,
+    amount: 80,
     dueDate: "2023-07-15",
     categoryId: "cat-6",
     isRecurring: true,
@@ -185,7 +264,7 @@ export const mockBills: Bill[] = [
   {
     id: "bill-4",
     name: "Phone Bill",
-    amount: 0,
+    amount: 65,
     dueDate: "2023-07-18",
     categoryId: "cat-6",
     isRecurring: true,
@@ -196,7 +275,7 @@ export const mockBills: Bill[] = [
   {
     id: "bill-5",
     name: "Gym Membership",
-    amount: 0,
+    amount: 40,
     dueDate: "2023-07-05",
     categoryId: "cat-8",
     isRecurring: true,
@@ -211,56 +290,56 @@ export const mockBudgetItems: BudgetItem[] = [
   {
     id: "budget-1",
     categoryId: "cat-4", // Groceries
-    amount: 0,
-    spent: 0,
+    amount: 400,
+    spent: 320,
     month: 6,
     year: 2023,
   },
   {
     id: "budget-2",
     categoryId: "cat-5", // Rent
-    amount: 0,
-    spent: 0,
+    amount: 1800,
+    spent: 1800,
     month: 6,
     year: 2023,
   },
   {
     id: "budget-3",
     categoryId: "cat-6", // Utilities
-    amount: 0,
-    spent: 0,
+    amount: 300,
+    spent: 235,
     month: 6,
     year: 2023,
   },
   {
     id: "budget-4",
     categoryId: "cat-7", // Transportation
-    amount: 0,
-    spent: 0,
+    amount: 200,
+    spent: 80,
     month: 6,
     year: 2023,
   },
   {
     id: "budget-5",
     categoryId: "cat-8", // Entertainment
-    amount: 0,
-    spent: 0,
+    amount: 150,
+    spent: 85,
     month: 6,
     year: 2023,
   },
   {
     id: "budget-6",
     categoryId: "cat-9", // Dining Out
-    amount: 0,
-    spent: 0,
+    amount: 300,
+    spent: 240,
     month: 6,
     year: 2023,
   },
   {
     id: "budget-7",
     categoryId: "cat-10", // Healthcare
-    amount: 0,
-    spent: 0,
+    amount: 250,
+    spent: 200,
     month: 6,
     year: 2023,
   },
@@ -268,26 +347,27 @@ export const mockBudgetItems: BudgetItem[] = [
 
 // Mock financial summary
 export const mockFinancialSummary: FinancialSummary = {
-  totalIncome: 0,
-  totalExpenses: 0,
-  balance: 0,
-  savings: 0,
+  totalIncome: 6950,
+  totalExpenses: 3715,
+  balance: 3235,
+  savings: 1668,
   monthlyBreakdown: [
-    { month: "Jan", income: 0, expenses: 0 },
-    { month: "Feb", income: 0, expenses: 0 },
-    { month: "Mar", income: 0, expenses: 0 },
-    { month: "Apr", income: 0, expenses: 0 },
-    { month: "May", income: 0, expenses: 0 },
-    { month: "Jun", income: 0, expenses: 0 },
+    { month: "Jan", income: 5200, expenses: 3200 },
+    { month: "Feb", income: 5200, expenses: 3400 },
+    { month: "Mar", income: 5700, expenses: 3600 },
+    { month: "Apr", income: 5200, expenses: 3300 },
+    { month: "May", income: 6200, expenses: 3800 },
+    { month: "Jun", income: 6950, expenses: 3715 },
   ],
   categoryBreakdown: [
-    { categoryId: "cat-4", amount: 0, percentage: 0 }, // Groceries
-    { categoryId: "cat-5", amount: 0, percentage: 0 }, // Rent
-    { categoryId: "cat-6", amount: 0, percentage: 0 }, // Utilities
-    { categoryId: "cat-7", amount: 0, percentage: 0 }, // Transportation
-    { categoryId: "cat-8", amount: 0, percentage: 0 }, // Entertainment
-    { categoryId: "cat-9", amount: 0, percentage: 0 }, // Dining Out
-    { categoryId: "cat-10", amount: 0, percentage: 0 }, // Healthcare
+    { categoryId: "cat-4", amount: 320, percentage: 8.6 }, // Groceries
+    { categoryId: "cat-5", amount: 1800, percentage: 48.5 }, // Rent
+    { categoryId: "cat-6", amount: 150, percentage: 4.0 }, // Utilities
+    { categoryId: "cat-7", amount: 80, percentage: 2.2 }, // Transportation
+    { categoryId: "cat-8", amount: 45, percentage: 1.2 }, // Entertainment
+    { categoryId: "cat-9", amount: 120, percentage: 3.2 }, // Dining Out
+    { categoryId: "cat-10", amount: 200, percentage: 5.4 }, // Healthcare
+    { categoryId: "cat-11", amount: 800, percentage: 21.5 }, // Travel
   ],
 };
 
@@ -326,3 +406,4 @@ export const formatDate = (dateString: string) => {
     day: 'numeric'
   }).format(date);
 };
+

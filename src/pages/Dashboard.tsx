@@ -1,16 +1,20 @@
+
 import React from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
 import { 
   mockTransactions, 
   mockBills, 
   mockFinancialSummary, 
+  mockTravelExpenses,
+  mockSavingsGoals,
   getCategoryName, 
   formatCurrency, 
   formatDate,
   getCategoryColor 
 } from "@/data/mockData";
-import { ArrowUpCircle, ArrowDownCircle, PiggyBank, CreditCard, ArrowRight, ChartPie } from "lucide-react";
+import { ArrowUpCircle, ArrowDownCircle, PiggyBank, CreditCard, ArrowRight, ChartPie, Plane, Target, MapPin, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 import { ChartContainer, ChartTooltipContent, ChartTooltip } from "@/components/ui/chart";
@@ -52,8 +56,9 @@ const Dashboard = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       <h1 className="text-2xl font-bold">Dashboard</h1>
+      
+      {/* Financial Overview Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Financial Overview Cards */}
         <Card className="animate-slide-up" style={{ animationDelay: "0ms" }}>
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">Total Income</CardTitle>
@@ -172,6 +177,102 @@ const Dashboard = () => {
           <CardFooter>
             <Button variant="outline" size="sm" className="w-full">
               View All Bills
+            </Button>
+          </CardFooter>
+        </Card>
+      </div>
+
+      {/* Travel Expenses and Savings Goals */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Travel Expenses */}
+        <Card className="animate-fade-in">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle>Travel Expenses</CardTitle>
+              <CardDescription>Recent and upcoming trips</CardDescription>
+            </div>
+            <Plane className="h-5 w-5 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {mockTravelExpenses.map((trip) => (
+                <div key={trip.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <div className="flex items-center space-x-3">
+                    <div className={`p-2 rounded-full ${
+                      trip.status === "completed" ? "bg-green-100 text-green-600" : "bg-blue-100 text-blue-600"
+                    }`}>
+                      <MapPin className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <p className="font-medium">{trip.destination}</p>
+                      <div className="flex items-center text-sm text-muted-foreground">
+                        <Calendar className="h-3 w-3 mr-1" />
+                        {formatDate(trip.startDate)} - {formatDate(trip.endDate)}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-medium">{formatCurrency(trip.amount)}</p>
+                    <p className={`text-xs ${
+                      trip.status === "completed" ? "text-green-600" : "text-blue-600"
+                    }`}>
+                      {trip.status === "completed" ? "Completed" : "Planned"}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button variant="outline" size="sm" className="w-full">
+              <span>View All Trips</span>
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </CardFooter>
+        </Card>
+
+        {/* Savings Goals */}
+        <Card className="animate-fade-in">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+              <CardTitle>Savings Goals</CardTitle>
+              <CardDescription>Track your financial targets</CardDescription>
+            </div>
+            <Target className="h-5 w-5 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {mockSavingsGoals.map((goal) => {
+                const progressPercentage = (goal.currentAmount / goal.targetAmount) * 100;
+                return (
+                  <div key={goal.id} className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">{goal.name}</p>
+                        <p className="text-sm text-muted-foreground">
+                          Target: {formatDate(goal.targetDate)}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-medium">{formatCurrency(goal.currentAmount)}</p>
+                        <p className="text-xs text-muted-foreground">
+                          of {formatCurrency(goal.targetAmount)}
+                        </p>
+                      </div>
+                    </div>
+                    <Progress value={progressPercentage} className="h-2" />
+                    <p className="text-xs text-muted-foreground">
+                      {Math.round(progressPercentage)}% complete
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+          </CardContent>
+          <CardFooter>
+            <Button variant="outline" size="sm" className="w-full">
+              <span>Manage Goals</span>
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </CardFooter>
         </Card>
@@ -344,3 +445,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
