@@ -30,7 +30,7 @@ export const mockCategories: CategoryType[] = [
   { id: "cat-11", name: "Travel", color: "#FF9800", type: "expense" },
 ];
 
-// Mock travel expenses data
+// Mock travel expenses data with proper typing
 export const mockTravelExpenses = [
   {
     id: "travel-1",
@@ -38,7 +38,7 @@ export const mockTravelExpenses = [
     amount: 2450,
     startDate: "2023-05-15",
     endDate: "2023-05-22",
-    status: "completed",
+    status: "completed" as const,
     category: "Vacation"
   },
   {
@@ -47,7 +47,7 @@ export const mockTravelExpenses = [
     amount: 3200,
     startDate: "2023-08-10",
     endDate: "2023-08-18",
-    status: "planned",
+    status: "planned" as const,
     category: "Vacation"
   },
   {
@@ -56,12 +56,12 @@ export const mockTravelExpenses = [
     amount: 800,
     startDate: "2023-06-05",
     endDate: "2023-06-08",
-    status: "completed",
+    status: "completed" as const,
     category: "Business"
   }
 ];
 
-// Mock savings goals data
+// Mock savings goals data with proper typing
 export const mockSavingsGoals = [
   {
     id: "savings-1",
@@ -69,7 +69,7 @@ export const mockSavingsGoals = [
     targetAmount: 15000,
     currentAmount: 8500,
     targetDate: "2024-12-31",
-    priority: "high"
+    priority: "high" as const
   },
   {
     id: "savings-2",
@@ -77,7 +77,7 @@ export const mockSavingsGoals = [
     targetAmount: 25000,
     currentAmount: 12000,
     targetDate: "2024-06-30",
-    priority: "medium"
+    priority: "medium" as const
   },
   {
     id: "savings-3",
@@ -85,7 +85,7 @@ export const mockSavingsGoals = [
     targetAmount: 50000,
     currentAmount: 18500,
     targetDate: "2025-12-31",
-    priority: "high"
+    priority: "high" as const
   },
   {
     id: "savings-4",
@@ -93,7 +93,7 @@ export const mockSavingsGoals = [
     targetAmount: 5000,
     currentAmount: 3200,
     targetDate: "2024-03-31",
-    priority: "low"
+    priority: "low" as const
   }
 ];
 
