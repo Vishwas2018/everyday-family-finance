@@ -1,4 +1,3 @@
-
 import { 
   Transaction, 
   CategoryType, 
@@ -371,25 +370,31 @@ export const mockFinancialSummary: FinancialSummary = {
   ],
 };
 
-// Helper function to get category by ID
+// Helper function to get category by ID with error handling
 export const getCategoryById = (id: string) => {
+  if (!id) return undefined;
   return mockCategories.find(category => category.id === id);
 };
 
-// Helper function to get category color by ID
+// Helper function to get category color by ID with fallback
 export const getCategoryColor = (id: string) => {
+  if (!id) return "#cccccc";
   const category = getCategoryById(id);
   return category ? category.color : "#cccccc";
 };
 
-// Helper function to get category name by ID
+// Helper function to get category name by ID with fallback
 export const getCategoryName = (id: string) => {
+  if (!id) return "Uncategorized";
   const category = getCategoryById(id);
   return category ? category.name : "Uncategorized";
 };
 
-// Function to format currency
+// Function to format currency with error handling
 export const formatCurrency = (amount: number) => {
+  if (typeof amount !== 'number' || isNaN(amount)) {
+    return '$0.00';
+  }
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
@@ -397,13 +402,22 @@ export const formatCurrency = (amount: number) => {
   }).format(amount);
 };
 
-// Function to format date
+// Function to format date with error handling
 export const formatDate = (dateString: string) => {
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  }).format(date);
+  if (!dateString) return 'Invalid Date';
+  
+  try {
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return 'Invalid Date';
+    }
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    }).format(date);
+  } catch (error) {
+    console.error('Error formatting date:', error);
+    return 'Invalid Date';
+  }
 };
-
